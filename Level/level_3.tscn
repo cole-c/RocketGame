@@ -3,19 +3,6 @@
 [ext_resource type="Script" path="res://Level/landing_pad.gd" id="1_ygmgj"]
 [ext_resource type="PackedScene" uid="uid://cqvca86b1p62j" path="res://player.tscn" id="2_33v0n"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3egds"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-
-[sub_resource type="Sky" id="Sky_uo2jx"]
-sky_material = SubResource("ProceduralSkyMaterial_3egds")
-
-[sub_resource type="Environment" id="Environment_cdg0e"]
-background_mode = 2
-sky = SubResource("Sky_uo2jx")
-tonemap_mode = 2
-glow_enabled = true
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_30dbf"]
 albedo_color = Color(0.682879, 0.417477, 0.285101, 1)
 
@@ -28,14 +15,22 @@ albedo_color = Color(0.281653, 0.60959, 0.300295, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ciamt"]
 albedo_color = Color(0.689985, 0.776186, 0.264829, 1)
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pi1jk"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_ogik3"]
+sky_material = SubResource("ProceduralSkyMaterial_pi1jk")
+
+[sub_resource type="Environment" id="Environment_2417d"]
+background_mode = 1
+background_color = Color(0.145365, 0.30433, 0.270938, 1)
+sky = SubResource("Sky_ogik3")
+ambient_light_source = 3
+tonemap_mode = 2
+glow_enabled = true
+
 [node name="Level" type="Node3D"]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_cdg0e")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866024, -0.433016, 0.250001, 0.310111, -0.0729488, 0.947898, -0.392218, 0.898429, 0.197458, 25.7404, 27.4284, 0)
-shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0.48691, 5.395, 10.0141)
@@ -68,3 +63,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.098207, 9.40093, 0)
 use_collision = true
 size = Vector3(35.1949, 5.34821, 5)
 material = SubResource("StandardMaterial3D_ciamt")
+
+[node name="WorldEnvironment_cust" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2417d")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment_cust"]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0.48116, -0.857706, 0.18118, 0.135973, 0.277197, 0.951143, 0, -10.9015, 12.0679)
+light_energy = 0.5
+shadow_enabled = true

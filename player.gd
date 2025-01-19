@@ -39,6 +39,9 @@ func _process(delta: float) -> void:
 		booster_particles_left.emitting = true
 	else:
 		booster_particles_left.emitting = false
+		
+	if Input.is_action_just_pressed("ui_cancel"):
+		get_tree().quit()
 
 
 func _on_body_entered(body: Node) -> void:
@@ -64,7 +67,7 @@ func crash_sequence() -> void:
 	tween.tween_callback(get_tree().reload_current_scene)
 	
 func complete_level(next_level_file: String) -> void:
-	print("Yer a winner")
+	print("You won!")
 	success_audio.play()
 	success_particles.emitting = true
 	set_process(false) #disables _process function
